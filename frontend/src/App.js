@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import {} from "./components"
+import { useEffect } from "react"
+import {BrowserRouter as Router, Route} from "react-router-dom"
 
 function App() {
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+
+        <Route path = "/login">
+          
+        </Route>
+
+        <Route path = "/register">
+          
+        </Route>
+
+        <Route exact path = "/">
+          
+        </Route>
+
+        <Route path = '/routines'>
+
+        </Route>
+
+        <Route path = "/createRoutine">
+
+        </Route>
+
+        <Footer />
+
+      </div>
+    </Router>
   );
 }
 
