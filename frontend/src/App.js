@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 
 import Login from './components/Login';
 import Register from './components/Login';
-import Header from './components/Header';
-import NavHeader from './components/NavHeader';
+import { Header } from './components/Header';
+import { NavHeader } from './components/NavHeader';
 import Footer from './components/Footer';
 import Home from './components/Home';
 import Profile from './components/Profile';
@@ -20,7 +20,6 @@ function App() {
   return (
     <Router>
       <div className="App">
-
       <Route path = "/login">
         <Header/>
         <Login
