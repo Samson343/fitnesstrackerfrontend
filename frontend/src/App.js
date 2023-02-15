@@ -9,7 +9,7 @@ import { NavHeader } from './components/NavHeader';
 import Footer from './components/Footer';
 import Home from './components/Home';
 import Profile from './components/Profile';
-import Activities from './components/Activities'
+import { Activities } from './components/Activities'
 import Routines from './components/Routines'
 import RoutineActivities from './components/Routine_Activities';
 
