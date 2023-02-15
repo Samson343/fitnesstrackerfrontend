@@ -1,0 +1,26 @@
+.Cards {
+    border: 2px solid white;
+    width: 40em;
+    height: 25em;
+    margin: 10px 10px;
+    border-radius: 2%;
+    box-shadow: 10px 10px 10px 3px rgb(35, 35, 35);
+    background-color: #282c34;
+    text-align: left;
+    padding: 20px;
+    overflow-y: scroll;
+    color: white
+}
+
+.MainDiv{
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 95vw;
+    flex-wrap: wrap;
+    align-self: center;
+    border-top: 1px solid white;
+    user-select: none;
+}
