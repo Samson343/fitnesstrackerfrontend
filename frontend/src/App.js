@@ -1,6 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { useEffect, useState } from 'react';
+import '@fontsource/roboto/400.css';
 
 import Login from './components/Login';
 import Register from './components/Login';
@@ -15,12 +16,12 @@ import RoutineActivities from './components/Routine_Activities';
 
 
 function App() {
-  const [token, setToken] = useState('')
+  const [token, setToken] = useState('j')
   
   return (
     <Router>
       <div className='app'>
-        <p>hello</p>
+      <p>hello</p>
       <Route path = "/login">
         <Header/>
         <Login
