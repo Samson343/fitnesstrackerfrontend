@@ -7,7 +7,7 @@ export const callApi = async ({ url, method, token, body }) => {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(body)
+            body: JSON.stringify(body) 
         };
         if (token) options.headers["Authorization"] = `Bearer ${token}`;
 

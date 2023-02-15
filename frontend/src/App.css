@@ -1,1 +1,6 @@
 /* good to use this for global styling */
+.app{
+    background-color: rgb(34, 83, 83);
+    height: 100%;
+    width: 100%
+}
