@@ -1,6 +1,7 @@
 import React from "react"
 import styles from './NavHeader.module.css'
 import { Link } from 'react-router-dom'
+import Button from '@mui/material/Button';
 
 //A header with icons and/or menus to navigate to different components
 
@@ -19,7 +20,14 @@ export const NavHeader = () => {
             <h4>Profile</h4>
           </Link>
         </span>
-        <span className={styles.spaceHolder}></span>
+        {/* <Button variant="outlined" color="error">
+          Register/Login
+        </Button>  */}
+        {/* styling mui components is harder than it's worth lol */}
+        <Link to = "/login">
+        <button className= {styles.Button}>Register/Login</button>
+        </Link>
+
     </header>
   )
 }

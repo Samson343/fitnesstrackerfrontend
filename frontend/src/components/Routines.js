@@ -11,6 +11,16 @@ import Button from '@mui/material/Button';
 //make a form to create a new routine in the database - will need inputs for name, goal, and isPublic
 //finally, add functionality to attach activities to existing routines
 
+//some material UI junk just to change the color of a button
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: 'rgb(199, 190, 190)',
+    }
+  },
+});
+
 
 const Routines = ({ token }) => {
   const [routines, setRoutines] = useState([])
@@ -69,7 +79,10 @@ const Routines = ({ token }) => {
              setGoal(e.target.value)
           }} 
           id="outlined-basic" label="What's the goal?" variant="outlined" />
-          <Button className={styles.submitButton} size ="small" type="submit" >Create</Button>
+          <ThemeProvider theme={theme}>
+             <Button className={styles.submitButton} size ="small" type="submit" color = "primary">Create</Button>
+          </ThemeProvider>
+          
         </form>
       }
       <div className={styles.MainDiv}>
