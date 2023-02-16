@@ -14,9 +14,9 @@ const ActivityPost = () => {
     const postActivity = async () => {
         try {
             const response = await callApi({
-                url: "/activities",
+                url: "activities",
                 method: "POST",
-                token
+                token,
                 body: {
                     name,
                     description

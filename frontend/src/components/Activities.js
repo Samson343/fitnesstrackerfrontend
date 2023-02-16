@@ -5,14 +5,15 @@ import styles from './Activities.module.css';
 //map and display all activites from the activities table
 //include a form to create activities that has two inputs - name, and description
 
-const Activities = () => {
+const Activities = ({token}) => {
     const [activities, setActivities] = useState([]);
     const [newActivity, setNewActivity] = useState({ name: '', description: '' });
 
     const allActivities = async () => {
         try {
             const response = await callApi({
-                url: "/activities"
+                url: "activities",
+                token
             });
             if (response) {
                 setActivities(response);
@@ -32,8 +33,9 @@ const Activities = () => {
 
         try {
             const response = await callApi({
-                url: "/activities",
+                url: "activities",
                 method: "POST",
+                token,
                 body: newActivity
             });
             if (response) {
