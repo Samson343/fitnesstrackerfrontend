@@ -22,6 +22,7 @@ function App() {
     <Router>
       <div className='app'>
       <p>hello</p>
+
       <Route path = "/login">
         <Header/>
         <Login
@@ -70,7 +71,9 @@ function App() {
       </Route>
 
         <Footer />
-        </div>
+
+      </div>
+
     </Router>
   );
 }
