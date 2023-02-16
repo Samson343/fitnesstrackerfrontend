@@ -21,7 +21,6 @@ function App() {
   return (
     <Router>
       <div className='app'>
-      <p>hello</p>
       <Route path = "/login">
         <Header/>
         <Login

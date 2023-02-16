@@ -43,10 +43,19 @@
     background-color:rgb(150, 142, 142);
     color: black
 }
+.Button {
+    background-color: #282c34;
+    color: rgb(150, 142, 142);
+    margin-left: 15px;
+}
+.Button:hover {
+    background-color:rgb(150, 142, 142);
+    color: black
+}
 .heading {
     color:white;
     margin-left: calc(80px + 1.325vw);
-    font-size: calc(8px + 2vmin);
+    font-size: calc(8px + 1.5vmin);
     margin-bottom: calc(5px + 1vw)
 }
 .boldFont {

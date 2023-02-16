@@ -16,6 +16,8 @@ const Routines = ({ token }) => {
   const [routines, setRoutines] = useState([])
   const [displayActivities, setDisplayActivities] = useState(false)
   const [displayCreateForm, setDisplayCreateForm] = useState(false)
+  const [name, setName] = useState('')
+  const [goal, setGoal] = useState('')
 
   useEffect(() => {
     callApi({ url: 'routines' })
@@ -42,10 +44,32 @@ const Routines = ({ token }) => {
         ></AddBoxIcon>
       </h3>
       {token && displayCreateForm &&
-        <form className={styles.createForm}>
-          <TextField size = "small" className={styles.formInputs} id="outlined-basic" label="Name your routine" variant="outlined" />
-          <TextField size = "small" className={styles.formInputs} id="outlined-basic" label="What's the goal?" variant="outlined" />
-          <Button size ="small" className={styles.submitButton}>Create</Button>
+        <form className={styles.createForm} onSubmit = {async (e) => {
+           e.preventDefault()
+           console.log("hello")
+           try {
+            await callApi ({url: 'routines', method: "POST", token: token, body: {
+              name: name,
+              goal: goal,
+              isPublic: true
+            } }).then((data) => {
+              console.log(data)
+              setName('')
+              setGoal('')
+            })
+           } catch (error) {
+            console.error(error)
+           }
+        }}>
+          <TextField size = "small" value = {name} className={styles.formInputs} onChange = {(e) => {
+             setName(e.target.value)
+          }}
+          id="outlined-basic" label="Name your routine" variant="outlined" />
+          <TextField size = "small" value = {goal} name = "goal" className={styles.formInputs} onChange = {(e) => {
+             setGoal(e.target.value)
+          }} 
+          id="outlined-basic" label="What's the goal?" variant="outlined" />
+          <Button className={styles.submitButton} size ="small" type="submit" >Create</Button>
         </form>
       }
       <div className={styles.MainDiv}>

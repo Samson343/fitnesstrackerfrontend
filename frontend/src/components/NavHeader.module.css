@@ -1,0 +1,32 @@
+.NavHeader {
+    display: flex;
+    min-width: 100vw;
+    justify-content: space-between;
+    padding-top: calc(5px + 1.5vh);
+    user-select: none;
+    border-bottom: 1px solid lightgrey;
+}
+.menuContainers {
+    display: flex;
+    width: 25%;
+    justify-content: space-between;
+}
+.link {
+    color:lightgray;
+    text-decoration: none;
+}
+.link:hover {
+    text-decoration: underline;
+}
+.navHeading {
+    margin-left: calc(10px + 3vw);
+    font-size: calc(10px + 1.5vmin);
+    color: rgb(7, 7, 7);
+    text-shadow: 1px 1px 5px rgb(70, 70, 70);
+}
+.spaceHolder {
+    margin-right: calc(20px + 11vw);
+}
+h4{
+    margin-top: 0;
+}
