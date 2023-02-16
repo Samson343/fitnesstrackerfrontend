@@ -46,6 +46,14 @@ const Activities = () => {
         }
     }
 
+    const nameChange = (event) => {
+        setNewActivity({ ...newActivity, name: event.target.value });
+    }
+
+    const descriptionChange = (event) => {
+        setNewActivity({ ...newActivity, description: event.target.value });
+    }
+
     return (
         <div className={styles.MainDiv}>
             <form onSubmit={handleSubmit}>
@@ -55,7 +63,7 @@ const Activities = () => {
                         type="text"
                         id="name"
                         value={newActivity.name}
-                        onChange={(event) => setNewActivity({ ...newActivity, name: event.target.value })}
+                        onChange={nameChange}
                     />
                 </div>
                 <div>
@@ -64,7 +72,7 @@ const Activities = () => {
                         type="text"
                         id="description"
                         value={newActivity.description}
-                        onChange={(event) => setNewActivity({ ...newActivity, description: event.target.value })}
+                        onChange={descriptionChange}
                     />
                 </div>
                 <button type="submit">New Activity</button>
