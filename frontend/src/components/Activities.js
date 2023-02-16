@@ -27,8 +27,48 @@ const Activities = () => {
         allActivities();
     }, []);
 
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        try {
+            const response = await callApi({
+                url: "/activities",
+                method: "POST",
+                body: newActivity
+            });
+            if (response) {
+                setNewActivity({ name: '', description: '' });
+                setActivities([...activities, response]);
+            }
+        }
+        catch (error) {
+            console.error(error);
+        }
+    }
+
     return (
         <div className={styles.MainDiv}>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label>Name: </label>
+                    <input
+                        type="text"
+                        id="name"
+                        value={newActivity.name}
+                        onChange={(event) => setNewActivity({ ...newActivity, name: event.target.value })}
+                    />
+                </div>
+                <div>
+                    <label>Description: </label>
+                    <input
+                        type="text"
+                        id="description"
+                        value={newActivity.description}
+                        onChange={(event) => setNewActivity({ ...newActivity, description: event.target.value })}
+                    />
+                </div>
+                <button type="submit">New Activity</button>
+            </form>
             {activities.map((activity) => (
                 <div key={activity.id}>
                     <h2>{activity.name}</h2>
