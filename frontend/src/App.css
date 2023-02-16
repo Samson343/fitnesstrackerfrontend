@@ -1,1 +1,11 @@
 /* good to use this for global styling */
+.app{
+    background-color: rgb(27, 31, 31);
+    height: 100%;
+    width: 100%;
+    font-family: roboto;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+}
