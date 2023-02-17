@@ -16,7 +16,7 @@ import RoutineActivities from './components/Routine_Activities';
 
 
 function App() {
-  const [token, setToken] = useState('j')
+  const [token, setToken] = useState('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDU4LCJ1c2VybmFtZSI6IkJvYkpvaG5zb24iLCJpYXQiOjE2NzY1NzUzNzksImV4cCI6MTY3NzE4MDE3OX0.AqVSKPWrma6Yvlq6DNmUI24EjNYrtIVHiuKjuVVZq7s')
   
   return (
     <Router>

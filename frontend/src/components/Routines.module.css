@@ -77,6 +77,14 @@
     background-color: rgb(180, 171, 171);
     border-radius: 5%;
 }
+.selector {
+    width: calc(35px + 20vw);
+    margin-left: calc(8px + 1vw);
+}
+.options {
+    max-width: calc(35px + 20vw);
+    overflow-x: hidden;
+}
 
 .Cards::-webkit-scrollbar {
     border-radius: 30%;
