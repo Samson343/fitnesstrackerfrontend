@@ -1,95 +1,88 @@
-import React, {useState} from "react";
-import { Link, useHistory} from 'react-router-dom';
-import { login, register } from "../api";
+import React from "react";
+import { useRef, useEffect, useState } from "react"
+import styles from './Logins.module.css'
+import { callApi } from "../api/apiCalls"
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import TextField from '@mui/material/TextField';
+import AddBoxIcon from '@mui/icons-material/AddBox';
+import Button from '@mui/material/Button';
 
-async function loginUser(username, password, setToken, history){
-    try{
-        const result = await login(username, password);
-        if(result.success === false){
-            document.getElementById("errorMessage").innerHTML = result.error.message;
-        }else{
-            const token = result.token;
-            setToken(token);
-            localStorage.setItem("token", token);
-            history.push("/");
-        }
-    }catch (error){
-        console.error("Error Logging in Users", error)
+
+
+
+
+const Login = () => {
+    const userRef = userRef();
+    const errRef = useRef();
+    const [user, setUser] = useState('');
+    const [password, setPassword] = useState('');
+    const [errMsg, setErrMsg] = useState('');
+    const [success, setSuccess] = useState(false);
+
+    useEffect(() => {
+        userRef.current.focus();
+    }, []);
+
+    useEffect(() => {
+        setErrMsg('');
+    }, [user, password])
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log(user, password);
+        setUser('');
+        setPassword('');
+        setSuccess(true);
     }
-}
 
-async function registerUser(username, password, confirmPassword, setToken, history){
-    if(confirmPassword === password){  
-        try{
-            const result = await register(username, password);
-            if(result.success === false){
-                document.getElementById("errorMessage").innerHTML = result.error.message;
-            }else{
-                const token = result.token;
-                setToken(token);
-                localStorage.setItem("token", token);
-                history.push("/");
-            }
-        }catch (error){
-            console.error("Error Logging in Users", error)
-        }
-    }else{
-        document.getElementById("errorMessage").innerHTML = "Passwords must match!";
-    }     
-}
-
-const Login = ({setToken , match}) => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-
-    const history = useHistory();
-
-    return(
-        <form className="m-3 w-50 position-absolute top-50 start-50 translate-middle" 
-            onSubmit={(event) => {
-                event.preventDefault();
-                if(match.url === "/register"){
-                    registerUser(username, password, confirmPassword, setToken, history);
-                }else {
-                    loginUser(username, password, setToken, history);
-                }
-            }}
-        >
-            <div className="mb-3">
-                <label htmlFor="usernameInput" className="form-label">Username (min 5 Characters)</label>
-                <input type="text" className="form-control" id="usernameInput" placeholder="Username..." minLength="5"
-                    onChange={({target: {value}}) => setUsername(value)}/>
-            </div>
-            <div className="mb-3">
-                <label htmlFor="passwordInput" className="form-label">Password (min 8 Characters)</label>
-                <input type="password" className="form-control" id="passwordInput" placeholder="Password..." minLength="5"
-                    onChange={({target: {value}}) => setPassword(value)}/>
-            </div>
-            {(match.url === "/register" ? 
-                <div className="mb-3">
-                    <label htmlFor="confirmPasswordInput" className="form-label">Confirm Password (min 8 Characters)</label>
-                    <div className="input-group has-validation">
-                        <input type="password" className="form-control" id="confirmPasswordInput" placeholder="Confirm Password..." minLength="5"
-                            onChange={
-                                ({target: {value}}) => {
-                                    setConfirmPassword(value)
-                                }
-                        }/>
-                    </div>
-                </div>
-            : null)}
-            <div id="errorMessage" className="danger m-3"> </div>
-            <button type="submit" className="btn btn-primary">Login</button>
-            <div className="mb-3">                
-                {(match.url === "/register" ?
-                    <Link to="/login">Already a user? Login Here! </Link> 
-                    :
-                    <Link to="/register">Not a User? Register Here! </Link>
-                )}
-            </div>
+return (
+    <>
+    {success ? (
+        <section>
+            <h1>You are Logged in!</h1>
+            <br />
+            <p>
+                <a href="#">Go to Home</a>
+            </p>
+        </section>
+    ) : (
+    <section>
+        <p ref={errRef} className={errMsg ? "errmsg" : 
+        "offscreen"} aria-live="assertive">{errMsg}</p>
+        <h1>Sign In</h1>
+        <form onSubmit={handleSubmit}>
+            <label htmlFor="username">Username:</label>
+            <input 
+                type="text" 
+                id="username"
+                ref={userRef}
+                autoComplete="off"
+                onChange={((e) => setUser(e.target.value))}
+                value={user}
+                required
+            />
+            <label htmlFor="password">Password:</label>
+            <input 
+                type="password" 
+                id="password"
+                ref={userRef}
+                onChange={((e) => setPassword(e.target.value))}
+                value={password}
+                required
+            />
+            <button>Sign In</button>
         </form>
-    )
+        <p>
+            Need an Account?<br />
+            <span className="line">
+                {/*put router link here*/}
+                <a href="#">Sign Up</a>
+            </span>
+        </p>
+    </section>
+    )}
+    </>
+)
 }
 
 export default Login;

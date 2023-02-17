@@ -1,0 +1,112 @@
+.routines {
+    margin: 0;
+    padding: 0;
+}
+
+.Cards {
+    border: 2px solid white;
+    width: 40em;
+    height: 25em;
+    margin: 10px 10px;
+    border-radius: 1%;
+    box-shadow: 3px 3px 3px 1px rgb(57, 57, 57);
+    background-color: #282c34;
+    text-align: left;
+    padding: 20px;
+    overflow-y: scroll;
+    color: white;
+}
+.MainDiv{
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 99vw;
+    flex-wrap: wrap;
+    align-self: center;
+    border-top: 1px solid white;
+    user-select: none;
+    font-size: calc(2px + 1.7vmin);
+    color: white;
+    margin-top: 10px;
+}
+.addButton {
+    margin-left: 8px;
+}
+.submitButton {
+    background-color: #282c34;
+    color: rgb(150, 142, 142);
+    margin-left: 15px;
+}
+.submitButton:hover {
+    background-color:rgb(150, 142, 142);
+    color: black
+}
+.Button {
+    background-color: #282c34;
+    color: rgb(199, 190, 190);
+    margin-left: 15px;
+}
+.Button:hover {
+    background-color:rgb(150, 142, 142);
+    color: black
+}
+.heading {
+    color:white;
+    margin-left: calc(80px + 1.325vw);
+    font-size: calc(8px + 1.5vmin);
+    margin-bottom: calc(5px + 1vw)
+}
+.boldFont {
+    text-decoration:underline;
+    color: lightgray;
+    font-weight: 400;
+}
+.createForm {
+    color: white;
+    background-color: rgb(109, 106, 106);
+    padding: 10px 0 10px;
+    border: 1px solid white;
+    display: flex;
+    justify-content: center;
+    margin-bottom: calc(5px + 0.7vh);
+}
+.formInputs {
+    margin-left: 20px;
+    background-color: rgb(180, 171, 171);
+    border-radius: 5%;
+}
+.selector {
+    width: calc(35px + 20vw);
+    margin-left: calc(8px + 1vw);
+}
+.options {
+    max-width: calc(35px + 20vw);
+    overflow-x: hidden;
+}
+
+.Cards::-webkit-scrollbar {
+    border-radius: 30%;
+}
+
+.Cards::-webkit-scrollbar-track-piece {
+    background: rgb(53, 52, 52);
+    border-radius: 10%;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 9%;
+}
+.MainDiv::-webkit-scrollbar {
+    border-radius: 30%;
+}
+
+.MainDiv::-webkit-scrollbar-track-piece {
+    background: rgb(53, 52, 52);
+    border-radius: 10%;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 9%;
+}
