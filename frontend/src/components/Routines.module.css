@@ -17,7 +17,7 @@
     color: white;
 }
 .MainDiv{
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -33,6 +33,14 @@
 }
 .addButton {
     margin-left: 8px;
+    width: (calc(8px + 5vw));
+    font-size: calc(5px + 0.5vw);
+}
+.dropdownButton {
+    padding: 0
+}
+.addIcon {
+    font-size: calc(5px + 0.75vw);
 }
 .submitButton {
     background-color: #282c34;
@@ -43,10 +51,19 @@
     background-color:rgb(150, 142, 142);
     color: black
 }
+.Button {
+    background-color: #282c34;
+    color: rgb(199, 190, 190);
+    margin-left: 15px;
+}
+.Button:hover {
+    background-color:rgb(150, 142, 142);
+    color: black
+}
 .heading {
     color:white;
     margin-left: calc(80px + 1.325vw);
-    font-size: calc(8px + 2vmin);
+    font-size: calc(8px + 1.5vmin);
     margin-bottom: calc(5px + 1vw)
 }
 .boldFont {
@@ -67,6 +84,29 @@
     margin-left: 20px;
     background-color: rgb(180, 171, 171);
     border-radius: 5%;
+}
+.activityForm {
+    display: inline;
+    display: flex;
+    font-size: calc(5px + 1.15vh);
+    justify-content: space-between;
+    margin-top: 5px;
+    /* border-top: 1px solid #858585;
+    border-bottom: 1px solid #858585; */
+    padding: 6px 0 6px;
+
+
+}
+.activityInputs{
+    width: calc(10px + 8.5vw);
+}
+.selector {
+    width: calc(10px + 8.5vw);
+    margin-right: calc(5px + 1.5vw);
+}
+.options {
+    max-width: calc(35px + 20vw);
+    overflow-x: hidden;
 }
 
 .Cards::-webkit-scrollbar {
