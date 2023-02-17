@@ -33,6 +33,14 @@
 }
 .addButton {
     margin-left: 8px;
+    width: (calc(8px + 5vw));
+    font-size: calc(5px + 0.5vw);
+}
+.dropdownButton {
+    padding: 0
+}
+.addIcon {
+    font-size: calc(5px + 0.75vw);
 }
 .submitButton {
     background-color: #282c34;
@@ -77,9 +85,12 @@
     background-color: rgb(180, 171, 171);
     border-radius: 5%;
 }
+.activityForm {
+    display: inline;
+}
 .selector {
-    width: calc(35px + 20vw);
-    margin-left: calc(8px + 1vw);
+    width: calc(25px + 10vw);
+    margin-left: calc(4px + 0.3vw);
 }
 .options {
     max-width: calc(35px + 20vw);

@@ -25,8 +25,11 @@ const theme = createTheme({
 const Routines = ({ token }) => {
   const [routines, setRoutines] = useState([])
   const [activities, setActivities] = useState([])
+  const [routineHolder, setRoutineHolder] = useState({})
   const [displayActivities, setDisplayActivities] = useState(false)
   const [displayCreateForm, setDisplayCreateForm] = useState(false)
+  const [displayAddActivities, setAddDisplayActivities] = useState(false)
+  const [actSelectorValue, setActSelectorValue] = useState('')
   const [name, setName] = useState('')
   const [goal, setGoal] = useState('')
 
@@ -41,26 +44,45 @@ const Routines = ({ token }) => {
   }, [])
 
   useEffect(() => {
-    callApi({url: "activities"})
+    callApi({ url: "activities" })
       .then(data => {
-        console.log("this is activities", data)
         setActivities(data)
+        console.log("this is activities", activities)
       })
       .catch((error) => {
         console.error(error)
       })
   }, [])
 
+  //handler to add an activity to a routine, needs the routine id as well as an activity by id
+  async function addActivityHandler (activity) {
+      console.log("this is the activity", activity)
+      console.log("this is the routine", routineHolder)
+
+      callApi({
+        url: `routines/${routineHolder.id}/activities`,
+        method: "POST", 
+        token: token,
+        body: {
+          activityId: activity[0].id,
+          count: 1,
+          duration: 1
+        }
+      })
+        .then (data => console.log("this is attachActivity", data))
+        .catch (error => console.error(error))
+  }
+
   return (
     <div className={styles.routines}>
       <h3 className={styles.heading}>Routines
         <AddBoxIcon onClick={() => {
-          if (!displayCreateForm) {
-            setDisplayCreateForm(true)
-          } else if (displayCreateForm) {
-            setDisplayCreateForm(false)
+            if (!displayCreateForm) {
+              setDisplayCreateForm(true)
+            } else if (displayCreateForm) {
+              setDisplayCreateForm(false)
+            }
           }
-        }
         }
         ></AddBoxIcon>
       </h3>
@@ -90,8 +112,8 @@ const Routines = ({ token }) => {
         }}>
           <TextField size="small" value={name} className={styles.formInputs} onChange={(e) => {
             setName(e.target.value)
-          }}
-            id="outlined-basic" label="Name your routine" variant="outlined" />
+          }} 
+          id="outlined-basic" label="Name your routine" variant="outlined" />
           <TextField size="small" value={goal} name="goal" className={styles.formInputs} onChange={(e) => {
             setGoal(e.target.value)
           }}
@@ -112,29 +134,53 @@ const Routines = ({ token }) => {
               routine.activities.length &&
               <>
                 <span>Activities: &nbsp;</span>
-                <button onClick={() => {
-                  if (!displayActivities) {
-                    setDisplayActivities(true)
-                  } else if (displayActivities) {
-                    setDisplayActivities(false)
+                <button className = {styles.dropdownButton} onClick={() => {
+                    if (!displayActivities) {
+                      setDisplayActivities(true)
+                    } else if (displayActivities) {
+                      setDisplayActivities(false)
+                    }
                   }
-
-                }
                 }>&#9660;</button>
 
                 {/* some beautiful html to space out the circle icon since it's so hard to style material UI components */}
                 <span>&nbsp;&nbsp;</span>
-                <AddCircleOutlineIcon className={styles.addButton}></AddCircleOutlineIcon>
 
-                <select className={styles.selector}>
-                  {
-                    activities.map( (activity) => (
-                      <option className = {styles.options} key = {activity.id} value = {activity.id}>Name: {activity.name}</option> 
-                      )
-                    )
+                <AddCircleOutlineIcon className={styles.addIcon} onClick={() => {
+                    if (!displayAddActivities) {
+                      setAddDisplayActivities(true)
+                    } else if (displayAddActivities) {
+                      setAddDisplayActivities(false)
+                    }
                   }
-                </select>
+                }></AddCircleOutlineIcon>
 
+                {  
+                  displayAddActivities &&
+                  <form className={styles.activityForm} onSubmit = {(e) => {
+                    e.preventDefault()
+                    console.log("this is selector value", actSelectorValue)
+                    const activityById = activities.filter(activity => Number(activity.id) === Number(actSelectorValue))
+                    console.log("this is activity by Id", activityById)
+
+                    addActivityHandler(activityById)
+                  }}>
+                    <label> add activities:
+                      <select name = "activities" className={styles.selector} value = {actSelectorValue} onChange = {(e) => {
+                        setActSelectorValue(e.target.value)
+                        setRoutineHolder(routine)
+                      }}>
+                        {
+                          activities.map((activity) => (
+                            <option className={styles.options} key={activity.id} value={activity.id}>Name: {activity.name}</option>
+                          )
+                          )
+                        }
+                      </select>
+                    </label>
+                    <button value = "Submit" type = "submit" className={styles.addButton}>add to routine</button>
+                  </form>
+                }
               </>
             }
             {
@@ -153,7 +199,6 @@ const Routines = ({ token }) => {
           </div>
         ))
         }
-
       </div>
     </div>
   )
