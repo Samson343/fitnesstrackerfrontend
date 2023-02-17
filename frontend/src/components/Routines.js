@@ -28,8 +28,10 @@ const Routines = ({ token }) => {
   const [routineHolder, setRoutineHolder] = useState({})
   const [displayActivities, setDisplayActivities] = useState(false)
   const [displayCreateForm, setDisplayCreateForm] = useState(false)
-  const [displayAddActivities, setAddDisplayActivities] = useState(false)
+  const [displayAddActivities, setDisplayAddActivities] = useState(false)
   const [actSelectorValue, setActSelectorValue] = useState('')
+  const [countSelector, setCountSelector] = useState(null)
+  const [durationSelector, setDurationSelector] = useState(null)
   const [name, setName] = useState('')
   const [goal, setGoal] = useState('')
   const [updateAct, setUpdateAct] = useState(0)
@@ -42,7 +44,7 @@ const Routines = ({ token }) => {
       .catch((error) => {
         console.error(error)
       })
-  }, [updateAct, displayAddActivities])
+  }, [updateAct])
 
   useEffect(() => {
     callApi({ url: "activities" })
@@ -56,7 +58,7 @@ const Routines = ({ token }) => {
   }, [])
 
   //handler to add an activity to a routine, needs the routine id as well as an activity by id
-  async function addActivityHandler (activity) {
+  async function addActivityHandler (activity, count, duration) {
       console.log("this is the activity", activity)
       console.log("this is the routine", routineHolder)
        callApi({
@@ -65,8 +67,8 @@ const Routines = ({ token }) => {
         token: token,
         body: {
           activityId: activity[0].id,
-          count: 1,
-          duration: 1
+          count: count,
+          duration: duration
         }
       })
         .then (data => {
@@ -139,15 +141,6 @@ const Routines = ({ token }) => {
             <h4>{routine.name}</h4>
             <hr></hr>
             <p>Goal: {routine.goal}</p>
-            <AddCircleOutlineIcon className={styles.addIcon} onClick={() => {
-              console.log("this is displayAddActivities", displayAddActivities)
-              if (!displayAddActivities) {
-                setAddDisplayActivities(true)
-              } else if (displayAddActivities) {
-                setAddDisplayActivities(false)
-              }
-             }
-            }></AddCircleOutlineIcon>
             <span>Activities: &nbsp;</span>
             {
               routine.activities.length &&
@@ -164,14 +157,25 @@ const Routines = ({ token }) => {
             }
             {/* some beautiful html to space out the circle icon since it's so hard to style material UI components */}
             <span>&nbsp;&nbsp;</span>
+            <AddCircleOutlineIcon className={styles.addIcon} onClick={() => {
+              console.log("this is displayAddActivities", displayAddActivities)
+              if (!displayAddActivities) {
+                setDisplayAddActivities(true)
+              } else if (displayAddActivities) {
+                setDisplayAddActivities(false)
+              }
+             }
+            }></AddCircleOutlineIcon>
             
                 {  
                   displayAddActivities &&
                   <form className={styles.activityForm} onSubmit = {(e) => {
                     e.preventDefault()
                     const activityById = activities.filter(activity => Number(activity.id) === Number(actSelectorValue))
+                    addActivityHandler(activityById, countSelector, durationSelector)
                     setActSelectorValue('')
-                    addActivityHandler(activityById)
+                    setCountSelector(0)
+                    setDurationSelector(0)
                   }}>
                     <label> add activities:
                       <select name = "activities" className={styles.selector} value = {actSelectorValue} onChange = {(e) => {
@@ -186,9 +190,18 @@ const Routines = ({ token }) => {
                         }
                       </select>
                     </label>
-                    
-                    <button value = "Submit" type = "submit" className={styles.addButton}>add to routine</button>
-                    
+                   
+                    <label> count: (e.g. reps, laps) 
+                      <input type= "number" value = {countSelector} className={styles.activityInputs} onChange = {(e) => {
+                        setCountSelector(e.target.value)
+                      }}></input>
+                    </label>
+                    <label> duration: (in minutes)
+                      <input type= "number" value = {durationSelector} className={styles.activityInputs} onChange = {(e) => {
+                        setDurationSelector(e.target.value)
+                      }}></input>
+                    </label>
+                    <button value = "Submit" type = "submit" className={styles.addButton}>Add to routine</button>
                   </form>
                 }
             {
@@ -198,8 +211,8 @@ const Routines = ({ token }) => {
                   <p><span className={styles.boldFont}>Name</span>: {activity.name}</p>
                   <ul>
                     <li>Description: {activity.description}</li>
-                    <li>Duration: {activity.duration}</li>
-                    <li>Count: {activity.count}</li>
+                    <li>Count: {activity.count} repititions</li>
+                    <li>Duration: {activity.duration} minutes</li>
                   </ul>
                 </span>
               ))
