@@ -1,0 +1,32 @@
+.activities {
+    margin: 0;
+    padding: 0;
+}
+
+.MainDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 99vw;
+    flex-wrap: wrap;
+    align-self: center;
+    border-top: 1px solid white;
+    user-select: none;
+    font-size: calc(2px + 1.7vmin);
+    color: white;
+    margin-top: 10px;
+}
+
+.Cards {
+    border: 2px solid white;
+    width: 30em;
+    height: 25em;
+    margin: 10px 10px;
+    border-radius: 1%;
+    box-shadow: 3px 3px 3px 1px rgb(57, 57, 57);
+    background-color: #282c34;
+    text-align: left;
+    padding: 20px;
+    color: white;
+}

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { callApi } from "../api/apiCalls";
+import { TextField, Button } from "@mui/material";
 import styles from './Activities.module.css';
 
 //map and display all activites from the activities table
 //include a form to create activities that has two inputs - name, and description
 
-const Activities = ({token}) => {
+const Activities = ({ token }) => {
     const [activities, setActivities] = useState([]);
     const [newActivity, setNewActivity] = useState({ name: '', description: '' });
 
@@ -50,41 +51,45 @@ const Activities = ({token}) => {
 
     const nameChange = (event) => {
         setNewActivity({ ...newActivity, name: event.target.value });
-    }
+    };
 
     const descriptionChange = (event) => {
         setNewActivity({ ...newActivity, description: event.target.value });
-    }
+    };
 
     return (
-        <div className={styles.MainDiv}>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Name: </label>
-                    <input
-                        type="text"
-                        id="name"
-                        value={newActivity.name}
-                        onChange={nameChange}
-                    />
-                </div>
-                <div>
-                    <label>Description: </label>
-                    <input
-                        type="text"
-                        id="description"
-                        value={newActivity.description}
-                        onChange={descriptionChange}
-                    />
-                </div>
-                <button type="submit">New Activity</button>
+        <div className={styles.activities}>
+            <form onSubmit={handleSubmit} className={styles.createForm}>
+                <TextField
+                    size="small"
+                    className={styles.formInputs}
+                    id="outlined-basic"
+                    label="Name"
+                    variant="outlined"
+                    value={newActivity.name}
+                    onChange={nameChange}
+                />
+                <TextField
+                    size="small"
+                    className={styles.formInputs}
+                    id="outlined-basic"
+                    label="Description"
+                    variant="outlined"
+                    value={newActivity.description}
+                    onChange={descriptionChange}
+                />
+                <Button size="small" className={styles.submitButton} type="submit">
+                    New Activity
+                </Button>
             </form>
-            {activities.map((activity) => (
-                <div key={activity.id}>
-                    <h2>{activity.name}</h2>
-                    <p>{activity.description}</p>
-                </div>
-            ))}
+            <div className="styles.MainDiv">
+                {activities.map((activity) => (
+                    <div key={activity.id} className={styles.Cards}>
+                        <h2>{activity.name}</h2>
+                        <p>{activity.description}</p>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };
