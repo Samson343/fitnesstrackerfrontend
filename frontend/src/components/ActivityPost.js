@@ -1,85 +1,63 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { callApi } from "../api/apiCalls";
+import styles from './ActivityPost.module.css';
+import { TextField, Button } from "@mui/material";
 
-const ActivityPost = () => {
-    const [token, setToken] = useState([]);
-    const [allActivities, setAllActivities] = useState([]);
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
-    const [open, setOpen] = useState(false);
+const ActivityPost = async ({ token }) => {
+    const [newActivity, setNewActivity] = useState({ name: "", description: "" });
 
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-
-    const postActivity = async () => {
-        try {
-            const response = await callApi({
-                url: "activities",
-                method: "POST",
-                token,
-                body: {
-                    name,
-                    description
-                }
-            })
-            await allActivities();
-        }
-        catch (error) {
-            console.error(error);
-        }
-    }
-
-    const activityName = (event) => {
-        setName(event.target.value);
-    }
-
-    const descriptionHandler = (event) => {
-        setDescription(event.target.value);
-    }
-
-    const submitHandler = (event) => {
+    const submitHandler = async (event) => {
         event.preventDefault();
-        postActivity();
-        setName("");
-        setDescription("");
-        setOpen(false);
-    }
+    };
 
-    useEffect(() => {
-        setToken(localStorage.getItem("token"));
-    }, []);
+    try {
+        const response = await callApi({
+            url: "activities",
+            method: "POST",
+            token,
+            body: newActivity
+        });
+
+        if (response) {
+            setNewActivity({ name: "", description: "" });
+        }
+    }
+    catch (error) {
+        console.error(error);
+    };
+
+    const changeName = (event) => {
+        setNewActivity({ ...newActivity, name: event.target.value });
+    };
+
+    const changeDescription = (event) => {
+        setNewActivity({ ...newActivity, description: event.target.value });
+    };
 
     return (
-        <div>
-            {
-                token ?
-                    <div>
-                        <button onClick={handleOpen}>Add Activity</button>
-                        <div>
-                            <form onSubmit={submitHandler}>
-                                <h5>Post an activity </h5>
-                                <label>Name: </label>
-                                <input
-                                    type="text"
-                                    id="activityName"
-                                    onChange={activityName}
-                                    value={name}
-                                />
-                                <br />
-                                <label>Description: </label>
-                                <textarea
-                                    id="description"
-                                    onChange={descriptionHandler}
-                                    value={description}
-                                />
-                                <br />
-                                <button type="submit">Add</button>
-                            </form>
-                        </div>
-                    </div>
-                    : ""
-            }
-        </div>
+        <form onSubmit={submitHandler} className={styles.createForm}>
+            <TextField
+                size="small"
+                className={styles.formInputs}
+                id="outlined-basic"
+                label="Name"
+                variant="outlined"
+                value={newActivity.name}
+                onChange={changeName}
+            />
+            <TextField
+                size="small"
+                className={styles.formInputs}
+                id="outlined-basic"
+                label="Description"
+                variant="outlined"
+                value={newActivity.description}
+                onChange={changeDescription}
+            />
+            <Button size="small" className={styles.submitButton} type="submit">
+                New Activity
+            </Button>
+        </form>
     )
 }
 

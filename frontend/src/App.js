@@ -1,6 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { useEffect, useState } from 'react';
+import '@fontsource/roboto/400.css';
 
 import Login from './components/Login';
 import Register from './components/Login';
@@ -10,6 +11,7 @@ import Footer from './components/Footer';
 import Home from './components/Home';
 import Profile from './components/Profile';
 import Activities from './components/Activities';
+import ActivityPost from './components/ActivityPost';
 import Routines from './components/Routines';
 import RoutineActivities from './components/Routine_Activities';
 
@@ -53,6 +55,9 @@ function App() {
           <Activities
             token={token}
           />
+          <ActivityPost
+            token={token}
+          />
         </Route>
 
         <Route path='/routines'>
@@ -72,6 +77,7 @@ function App() {
         <Footer />
 
       </div>
+
     </Router>
   );
 }

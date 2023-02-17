@@ -91,7 +91,7 @@ const Activities = ({ token }) => {
                 ))}
             </div>
         </div>
-    );
-};
+    )
+}
 
 export default Activities;

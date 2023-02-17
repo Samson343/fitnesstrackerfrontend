@@ -1,0 +1,55 @@
+.NavHeader {
+    display: flex;
+    min-width: 99vw;
+    justify-content: space-between;
+    user-select: none;
+    border-bottom: 1px solid lightgrey;
+    background-color: rgb(43, 49, 49)
+}
+
+.menuContainers {
+    display: flex;
+    width: 25%;
+    justify-content: space-between;
+    padding-top: calc(8px + 1.5vh);
+}
+
+.link {
+    color: lightgray;
+    text-decoration: none;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+.navHeading {
+    margin-left: calc(10px + 3vw);
+    font-size: calc(10px + 1.5vmin);
+    color: rgb(195, 191, 191);
+    text-shadow: 1px 1px rgb(125, 124, 124);
+    padding-top: calc(8px + 1.5vh);
+}
+
+.Button {
+    margin-top: calc(2px + 0.8vw);
+    margin-right: calc(10px + 5vw);
+    margin-bottom: 5px;
+    height: calc(8px + 3vh);
+    background-color: rgb(221, 219, 219);
+    padding: 0 10px 0 10px;
+    font-size: 16px;
+    cursor: pointer;
+    background: #f44336;
+    color: white;
+    border-color: rgb(72, 72, 72);
+}
+.Button:hover {
+    border-color: #bc342b;
+    color: rgb(180, 19, 19);
+    background-color: white;
+}
+
+h4 {
+    margin-top: 0;
+}
