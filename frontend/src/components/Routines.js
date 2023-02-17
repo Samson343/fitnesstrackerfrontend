@@ -32,6 +32,7 @@ const Routines = ({ token }) => {
   const [actSelectorValue, setActSelectorValue] = useState('')
   const [name, setName] = useState('')
   const [goal, setGoal] = useState('')
+  const [updateAct, setUpdateAct] = useState(0)
 
   useEffect(() => {
     callApi({ url: 'routines' })
@@ -41,7 +42,7 @@ const Routines = ({ token }) => {
       .catch((error) => {
         console.error(error)
       })
-  }, [])
+  }, [updateAct, displayAddActivities])
 
   useEffect(() => {
     callApi({ url: "activities" })
@@ -69,7 +70,10 @@ const Routines = ({ token }) => {
           duration: 1
         }
       })
-        .then (data => console.log("this is attachActivity", data))
+        .then (data => {
+          console.log("this is attachActivity", data)
+          setUpdateAct(updateAct + 1)
+        })
         .catch (error => console.error(error))
   }
 
@@ -130,10 +134,10 @@ const Routines = ({ token }) => {
             <h4>{routine.name}</h4>
             <hr></hr>
             <p>Goal: {routine.goal}</p>
+            <span>Activities: &nbsp;</span>
             {
               routine.activities.length &&
               <>
-                <span>Activities: &nbsp;</span>
                 <button className = {styles.dropdownButton} onClick={() => {
                     if (!displayActivities) {
                       setDisplayActivities(true)
@@ -142,19 +146,21 @@ const Routines = ({ token }) => {
                     }
                   }
                 }>&#9660;</button>
+                </>
+            }
+            {/* some beautiful html to space out the circle icon since it's so hard to style material UI components */}
+            <span>&nbsp;&nbsp;</span>
 
-                {/* some beautiful html to space out the circle icon since it's so hard to style material UI components */}
-                <span>&nbsp;&nbsp;</span>
-
-                <AddCircleOutlineIcon className={styles.addIcon} onClick={() => {
-                    if (!displayAddActivities) {
-                      setAddDisplayActivities(true)
-                    } else if (displayAddActivities) {
-                      setAddDisplayActivities(false)
-                    }
-                  }
-                }></AddCircleOutlineIcon>
-
+            <AddCircleOutlineIcon className={styles.addIcon} onClick={() => {
+              console.log("this is displayAddActivities", displayAddActivities)
+              if (!displayAddActivities) {
+                setAddDisplayActivities(true)
+              } else if (displayAddActivities) {
+                setAddDisplayActivities(false)
+              }
+             }
+            }></AddCircleOutlineIcon>
+            
                 {  
                   displayAddActivities &&
                   <form className={styles.activityForm} onSubmit = {(e) => {
@@ -178,11 +184,11 @@ const Routines = ({ token }) => {
                         }
                       </select>
                     </label>
+                    
                     <button value = "Submit" type = "submit" className={styles.addButton}>add to routine</button>
+                    
                   </form>
                 }
-              </>
-            }
             {
               displayActivities &&
               routine.activities.map((activity, index) => (
