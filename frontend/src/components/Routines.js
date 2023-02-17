@@ -59,8 +59,7 @@ const Routines = ({ token }) => {
   async function addActivityHandler (activity) {
       console.log("this is the activity", activity)
       console.log("this is the routine", routineHolder)
-
-      callApi({
+       callApi({
         url: `routines/${routineHolder.id}/activities`,
         method: "POST", 
         token: token,
@@ -71,10 +70,16 @@ const Routines = ({ token }) => {
         }
       })
         .then (data => {
-          console.log("this is attachActivity", data)
           setUpdateAct(updateAct + 1)
+          if (data) {
+            alert(`Success! The activity: "${activity[0].name}" was added to the routine: "${routineHolder.name}".`)
+          } else {
+            alert('Unsucessful - that activity may already exist as a part of that routine.')
+          }
         })
-        .catch (error => console.error(error))
+        .catch (error => {
+          alert(error.message)
+          console.error(error)})
   }
 
   return (
@@ -134,6 +139,15 @@ const Routines = ({ token }) => {
             <h4>{routine.name}</h4>
             <hr></hr>
             <p>Goal: {routine.goal}</p>
+            <AddCircleOutlineIcon className={styles.addIcon} onClick={() => {
+              console.log("this is displayAddActivities", displayAddActivities)
+              if (!displayAddActivities) {
+                setAddDisplayActivities(true)
+              } else if (displayAddActivities) {
+                setAddDisplayActivities(false)
+              }
+             }
+            }></AddCircleOutlineIcon>
             <span>Activities: &nbsp;</span>
             {
               routine.activities.length &&
@@ -150,25 +164,13 @@ const Routines = ({ token }) => {
             }
             {/* some beautiful html to space out the circle icon since it's so hard to style material UI components */}
             <span>&nbsp;&nbsp;</span>
-
-            <AddCircleOutlineIcon className={styles.addIcon} onClick={() => {
-              console.log("this is displayAddActivities", displayAddActivities)
-              if (!displayAddActivities) {
-                setAddDisplayActivities(true)
-              } else if (displayAddActivities) {
-                setAddDisplayActivities(false)
-              }
-             }
-            }></AddCircleOutlineIcon>
             
                 {  
                   displayAddActivities &&
                   <form className={styles.activityForm} onSubmit = {(e) => {
                     e.preventDefault()
-                    console.log("this is selector value", actSelectorValue)
                     const activityById = activities.filter(activity => Number(activity.id) === Number(actSelectorValue))
-                    console.log("this is activity by Id", activityById)
-
+                    setActSelectorValue('')
                     addActivityHandler(activityById)
                   }}>
                     <label> add activities:
