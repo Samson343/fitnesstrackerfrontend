@@ -207,7 +207,7 @@ const Routines = ({ token }) => {
                   <p><span className={styles.boldFont}>Name</span>: {activity.name}</p>
                   <ul>
                     <li>Description: {activity.description}</li>
-                    <li>Count: {activity.count} repititions</li>
+                    <li>Count: {activity.count} repetitions</li>
                     <li>Duration: {activity.duration} minutes</li>
                   </ul>
                 </span>
