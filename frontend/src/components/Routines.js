@@ -30,11 +30,12 @@ const Routines = ({ token }) => {
   const [displayCreateForm, setDisplayCreateForm] = useState(false)
   const [displayAddActivities, setDisplayAddActivities] = useState(false)
   const [actSelectorValue, setActSelectorValue] = useState('')
-  const [countSelector, setCountSelector] = useState(null)
-  const [durationSelector, setDurationSelector] = useState(null)
+  const [countSelector, setCountSelector] = useState(0)
+  const [durationSelector, setDurationSelector] = useState(0)
   const [name, setName] = useState('')
   const [goal, setGoal] = useState('')
   const [updateAct, setUpdateAct] = useState(0)
+  const [updateRoutines, setUpdateRoutines] = useState(0)
 
   useEffect(() => {
     callApi({ url: 'routines' })
@@ -44,7 +45,7 @@ const Routines = ({ token }) => {
       .catch((error) => {
         console.error(error)
       })
-  }, [updateAct])
+  }, [updateAct, updateRoutines])
 
   useEffect(() => {
     callApi({ url: "activities" })
@@ -115,6 +116,7 @@ const Routines = ({ token }) => {
 
               if (data) {
                 alert(`Success! Your routine "${data.name}" is now in the database`)
+                setUpdateRoutines(updateRoutines + 1)
               }
             })
           } catch (error) {
@@ -141,7 +143,6 @@ const Routines = ({ token }) => {
             <h4>{routine.name}</h4>
             <hr></hr>
             <p>Goal: {routine.goal}</p>
-            <span>Activities: &nbsp;</span>
             {
               routine.activities.length &&
               <>
@@ -155,8 +156,9 @@ const Routines = ({ token }) => {
                 }>&#9660;</button>
                 </>
             }
+            <span>&nbsp; Activities:</span>
             {/* some beautiful html to space out the circle icon since it's so hard to style material UI components */}
-            <span>&nbsp;&nbsp;</span>
+            <span>&nbsp;</span>
             <AddCircleOutlineIcon className={styles.addIcon} onClick={() => {
               console.log("this is displayAddActivities", displayAddActivities)
               if (!displayAddActivities) {
@@ -211,7 +213,7 @@ const Routines = ({ token }) => {
                   <p><span className={styles.boldFont}>Name</span>: {activity.name}</p>
                   <ul>
                     <li>Description: {activity.description}</li>
-                    <li>Count: {activity.count} repititions</li>
+                    <li>Count: {activity.count} repetitions</li>
                     <li>Duration: {activity.duration} minutes</li>
                   </ul>
                 </span>
