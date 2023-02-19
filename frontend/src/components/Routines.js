@@ -51,7 +51,6 @@ const Routines = ({ token }) => {
     callApi({ url: "activities" })
       .then(data => {
         setActivities(data)
-        console.log("this is activities", activities)
       })
       .catch((error) => {
         console.error(error)
@@ -60,8 +59,6 @@ const Routines = ({ token }) => {
 
   //handler to add an activity to a routine, needs the routine id as well as an activity by id
   async function addActivityHandler (activity, count, duration) {
-      console.log("this is the activity", activity)
-      console.log("this is the routine", routineHolder)
        callApi({
         url: `routines/${routineHolder.id}/activities`,
         method: "POST", 

@@ -33,7 +33,7 @@
 
 .Button {
     margin-top: calc(2px + 0.8vw);
-    margin-right: calc(10px + 5vw);
+    margin-right: calc(10px + 5.5vw);
     margin-bottom: 5px;
     height: calc(8px + 3vh);
     background-color: rgb(221, 219, 219);
@@ -52,4 +52,7 @@
 
 h4 {
     margin-top: 0;
+}
+.spaceHolder {
+    margin-right: calc(40px + 11vw)
 }

@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 
 //A header with icons and/or menus to navigate to different components
 
-export const NavHeader = () => {
+export const NavHeader = ({token, setToken}) => {
   return (
     <header className={styles.NavHeader}>
         <span className = {styles.navHeading}>Fitness track.er</span>
@@ -13,7 +13,7 @@ export const NavHeader = () => {
           <Link to="/activities" className={styles.link} title='View available exercises in the database, or add a new one'>
             <h4>Activities</h4>
           </Link>
-          <Link className={styles.link} to='/routines' title='Create a new routine or select an existing one'>
+          <Link className={styles.link} to='/' title='Create a new routine or select an existing one'>
             <h4>Routines</h4>
           </Link>
           <Link className={styles.link} to="/profile" title='Profile'>
@@ -24,9 +24,17 @@ export const NavHeader = () => {
           Register/Login
         </Button>  */}
         {/* styling mui components is harder than it's worth lol */}
+
+        {
+        !token ?
         <Link to = "/login">
         <button className= {styles.Button}>Register/Login</button>
         </Link>
+        : 
+        <button className={styles.Button} onClick = {() => {
+          setToken('')
+        }}>Log out</button>
+        }
 
     </header>
   )

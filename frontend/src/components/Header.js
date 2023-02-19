@@ -5,8 +5,10 @@ import styles from './Header.module.css'
 
 export const Header = () => {
     return (
-        <header className= {styles.header}>
-            
+        <header className={styles.header}>
+            <header className={styles.NavHeader}>
+                <span className={styles.navHeading}>Fitness track.er</span>
+            </header>
         </header>
     )
 }

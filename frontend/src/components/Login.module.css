@@ -1,0 +1,89 @@
+
+
+.Cards {
+    border: 2px solid white;
+    width: 23em;
+    height: 18em;
+    margin: 10px 10px;
+    border-radius: 1%;
+    box-shadow: 3px 3px 3px 1px rgb(57, 57, 57);
+    background-color: #3c3a3a;
+    text-align: left;
+    padding: 20px;
+    color: rgb(229, 227, 227);
+}
+.MainDiv{
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 99vw;
+    height: 93vh;
+    flex-wrap: wrap;
+    align-self: center;
+    user-select: none;
+    font-size: calc(2px + 1.7vmin);
+    color: white;
+}
+.buttonContainer {
+    margin-top: calc(5px + 1vh);
+    display: flex;
+    justify-content: space-between;
+}
+.addButton {
+    margin-left: 8px;
+    width: (calc(8px + 5vw));
+    font-size: calc(5px + 0.5vw);
+}
+.dropdownButton {
+    padding: 0
+}
+.addIcon {
+    font-size: calc(5px + 0.75vw);
+}
+.submitButton {
+    background-color: #282c34;
+    color: rgb(150, 142, 142);
+    margin-left: 15px;
+}
+.submitButton:hover {
+    background-color:rgb(150, 142, 142);
+    color: black
+}
+.Button {
+    background-color: #282c34;
+    color: rgb(199, 190, 190);
+    margin-left: 15px;
+}
+.Button:hover {
+    background-color:rgb(150, 142, 142);
+    color: black
+}
+.register {
+    color:rgb(242, 89, 155);
+    font-size: calc(4px + 1vh);
+}
+.heading {
+    color:white;
+    margin-left: calc(40px + 1.325vw);
+    font-size: calc(8px + 1vmin);
+    margin-bottom: calc(5px + 1vw)
+}
+
+.loginForm {
+    color: white;
+    padding: 10px 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+    margin-bottom: calc(5px + 0.7vh);
+}
+.formInputs {
+    margin-left: 20px;
+    background-color: rgb(180, 171, 171);
+    border-radius: 5%;
+}
+
+
+
