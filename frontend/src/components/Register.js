@@ -16,6 +16,10 @@ const Register = ({ setToken }) => {
 
     async function registerHandler (e) {
         e.preventDefault()
+
+        if (password.length < 7) {
+            alert("password is too short!")
+        }
     
         await callApi({
             url: "users/register", 

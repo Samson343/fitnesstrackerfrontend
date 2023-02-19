@@ -14,7 +14,7 @@ import Routines from './components/Routines'
 
 
 function App() {
-  const [token, setToken] = useState('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDU4LCJ1c2VybmFtZSI6IkJvYkpvaG5zb24iLCJpYXQiOjE2NzY1NzUzNzksImV4cCI6MTY3NzE4MDE3OX0.AqVSKPWrma6Yvlq6DNmUI24EjNYrtIVHiuKjuVVZq7s')
+  const [token, setToken] = useState('')
   
   return (
     <Router>
