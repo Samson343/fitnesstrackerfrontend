@@ -8,10 +8,14 @@ import { callApi } from "../api/apiCalls"
 const Profile = ({ token }) => {
   const [user, setUser] = useState({})
   const [routinesByUser, setRoutinesByUser] = useState([])
+  const [routineName, setRoutineName] = useState('')
+  const [routineDesc, setRoutineDesc] = useState ('')
   const [displayForm, setDisplayForm] = useState(false)
+  const [displayRoutineEdit, setDisplayRoutineEdit] = useState(false)
   const [count, setCount] = useState(0)
   const [duration, setDuration] = useState(0)
   const [updateActs, setUpdateActs] = useState(0)
+  const [updateRoutines, setUpdateRoutines] = useState(0)
 
   //grab the users, id/username
   useEffect(() => {
@@ -40,7 +44,7 @@ const Profile = ({ token }) => {
     }).catch((error) => {
       console.error(error)
     })
-  }, [user, updateActs])
+  }, [user, updateActs, updateRoutines])
 
   function removeActivity(act) {
     callApi({
@@ -50,8 +54,47 @@ const Profile = ({ token }) => {
     }).then((data) => {
       if (data) {
         alert("activity successfully removed.")
-        setUpdateActs(updateActs+1)
+        setUpdateActs(updateActs + 1)
       }
+    }).catch ((error) => {
+      console.error(error)
+    })
+  }
+
+  function removeRoutine (rout) {
+    callApi({
+      url: `routines/${rout.id}`,
+      method: "DELETE",
+      token: token
+    }).then((data) => {
+      if (data) {
+        alert(`routine ${rout.name} successfully removed.`)
+        setUpdateRoutines(updateRoutines + 1)
+      } 
+    }).catch ((error) => {
+      console.error(error)
+    })
+  }
+  
+  function updateRoutineHandler (name, description, routineId) {
+    callApi({
+      url: `routines/${routineId}`,
+      method: "PATCH",
+      token: token,
+      body: {
+        name: name,
+        goal: description 
+      }
+    }).then((data) => {
+      if (data) {
+        setUpdateRoutines(updateRoutines + 1)
+        setDisplayRoutineEdit(false)
+        alert("Success! Routine successfully deleted.")
+      } else {
+        alert("Unsuccessful- please try again with a different name or description.")
+      }
+    }).catch ((error) => {
+      console.error(error)
     })
   }
 
@@ -80,9 +123,38 @@ const Profile = ({ token }) => {
       <div className={styles.MainDiv}>
         {routinesByUser.map((routine, index) => (
           <div key={routine.id} className={styles.Cards}>
+            {
+             displayRoutineEdit ?
+             <>
+             <form onSubmit={(e) => {
+              e.preventDefault()
+              updateRoutineHandler(routineName, routineDesc, routine.id)
+
+              setRoutineName('')
+              setRoutineDesc('')
+             }}>
+              <input placeholder={routine.name} value = {routineName} onChange = {(e) => {
+                setRoutineName(e.target.value)
+              }}></input>
+              <hr></hr>
+              <input placeholder={routine.goal} value = {routineDesc} onChange = {(e) => {
+                setRoutineDesc(e.target.value)
+              }}></input>
+              &nbsp;&nbsp;&nbsp;
+              <button type="submit">Update Routine</button>
+             </form>
+             </> 
+             :
+             <>
             <h4>{routine.name}</h4>
             <hr></hr>
             <p className={styles.Goal}> Goal: {routine.goal}</p>
+             </>
+            }
+            { routine.activities.length ?
+              <p>Activities:</p>
+              : <p>0 activities attached</p>
+            }
             {
               routine.activities.map((activity, index) => (
                 <span key={index} className={styles.list}>
@@ -130,8 +202,16 @@ const Profile = ({ token }) => {
             <div className={styles.buttonContainer}>
               <span></span>
               <span></span>
-              <button className={styles.submitButton}>edit routine</button>
-              <button className={styles.submitButton}>delete routine</button>
+              <button className={styles.submitButton} onClick = {() => {
+                if (displayRoutineEdit) {
+                  setDisplayRoutineEdit(false)
+                } else {
+                  setDisplayRoutineEdit(true)
+                }
+              }}>edit routine</button>
+              <button className={styles.submitButton} onClick = {() => {
+                removeRoutine(routine)
+              }}>delete routine</button>
             </div>
           </div>
 
