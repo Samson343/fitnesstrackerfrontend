@@ -1,32 +1,28 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 import { callApi } from "../api/apiCalls";
 import styles from './ActivityPost.module.css';
 import { TextField, Button } from "@mui/material";
 
-const ActivityPost = ({ token }) => {
+const ActivityPost = ({ token, onCreate }) => {
     const [newActivity, setNewActivity] = useState({ name: "", description: "" });
 
-    const createActivity = useCallback(async () => {
+    const createActivity = async () => {
         try {
             const response = await callApi({
                 url: "activities",
                 method: "POST",
                 token,
-                body: newActivity
+                body: newActivity,
             });
 
             if (response) {
+                onCreate(response);
                 setNewActivity({ name: "", description: "" });
             }
-        }
-        catch (error) {
+        } catch (error) {
             console.error(error);
         }
-    }, [newActivity, token]);
-
-    useEffect(() => {
-        createActivity();
-    }, [newActivity, token, createActivity]);
+    };
 
     const changeName = (event) => {
         setNewActivity({ ...newActivity, name: event.target.value });
