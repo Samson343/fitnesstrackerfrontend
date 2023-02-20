@@ -4,23 +4,31 @@ import { useEffect, useState } from 'react';
 import '@fontsource/roboto/400.css';
 
 import Login from './components/Login';
-import Register from './components/Login';
+import Register from './components/Register';
 import { Header } from './components/Header';
 import { NavHeader } from './components/NavHeader';
 import Footer from './components/Footer';
-import Home from './components/Home';
 import Profile from './components/Profile';
 import Activities from './components/Activities'
 import Routines from './components/Routines'
-import RoutineActivities from './components/Routine_Activities';
 
 
 function App() {
-  const [token, setToken] = useState('j')
+  const [token, setToken] = useState('')
   
   return (
     <Router>
       <div className='app'>
+
+      <Route exact path = '/'>
+        <NavHeader 
+          token = {token}
+          setToken = {setToken}
+        />
+        <Routines
+          token = {token}    
+        />
+      </Route>
 
       <Route path = "/login">
         <Header/>
@@ -36,37 +44,22 @@ function App() {
         />
       </Route>
 
-      <Route exact path = "/">
-        <NavHeader/>
-        <Home
-          token = {token}
-        />
-      </Route>
-
       <Route path = "/profile">
-        <NavHeader/>
+        <NavHeader 
+          token = {token}
+          setToken = {setToken}
+          />
         <Profile
           token = {token}
         />
       </Route>
 
       <Route path = "/activities">
-        <NavHeader/>
+        <NavHeader
+        token = {token}
+        setToken = {setToken}
+        />
         <Activities/>
-      </Route>
-
-      <Route path = '/routines'>
-        <NavHeader/>
-        <Routines
-          token = {token}    
-        />
-      </Route>
-
-      <Route path = '/routine_activities'>
-        <NavHeader/>
-        <RoutineActivities
-          token = {token}
-        />
       </Route>
 
         <Footer />
