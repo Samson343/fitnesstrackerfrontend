@@ -9,7 +9,8 @@ import { Header } from './components/Header';
 import { NavHeader } from './components/NavHeader';
 import Footer from './components/Footer';
 import Profile from './components/Profile';
-import Activities from './components/Activities'
+import Activities from './components/Activities';
+import ActivityPost from './components/ActivityPost';
 import Routines from './components/Routines'
 
 
