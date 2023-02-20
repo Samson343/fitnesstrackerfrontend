@@ -59,7 +59,12 @@ function App() {
         token = {token}
         setToken = {setToken}
         />
-        <Activities/>
+        <Activities
+            token={token}
+          />
+          <ActivityPost
+            token={token}
+          />
       </Route>
 
         <Footer />
