@@ -119,7 +119,7 @@ const Activities = ({ token }) => {
 
     return (
         <div className={styles.activities}>
-            <form onSubmit={(event) => handleSubmit(event, newActivity.id)} className={styles.createForm}>
+            <form onSubmit={(event) => handleSubmit(event, activities[0].id)} className={styles.createForm}>
                 <TextField
                     size="small"
                     className={styles.formInputs}
