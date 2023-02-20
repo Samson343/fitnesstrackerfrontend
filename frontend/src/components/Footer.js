@@ -22,21 +22,23 @@ const Footer = () => {
     ];
 
     return (
-        <footer className={styles.footer}>
-            {developers.map((developer, index) => (
-                <div key={index} className={styles.developer}>
-                    <h4>{developer.name}</h4>
-                    <div className={styles.icons}>
-                        <a href={developer.linkedin} target="_blank" rel="noreferrer">
-                            <IoLogoLinkedin size={18} color="white" />
-                        </a>
-                        <a href={developer.github} target="_blank" rel="noreferrer">
-                            <IoLogoGithub size={18} color="white" />
-                        </a>
+        <div className={styles.mainDiv}>
+            <footer className={styles.footer}>
+                {developers.map((developer, index) => (
+                    <div key={index} className={styles.developer}>
+                        <h4>{developer.name}</h4>
+                        <div className={styles.icons}>
+                            <a href={developer.linkedin} target="_blank" rel="noreferrer">
+                                <IoLogoLinkedin size={18} color="white" />
+                            </a>
+                            <a href={developer.github} target="_blank" rel="noreferrer">
+                                <IoLogoGithub size={18} color="white" />
+                            </a>
+                        </div>
                     </div>
-                </div>
-            ))}
-        </footer>
+                ))}
+            </footer>
+        </div>
     );
 };
 
