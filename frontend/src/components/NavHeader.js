@@ -1,6 +1,7 @@
 import React from "react"
 import styles from './NavHeader.module.css'
 import { Link } from 'react-router-dom'
+
 import Button from '@mui/material/Button';
 
 //A header with icons and/or menus to navigate to different components

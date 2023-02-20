@@ -19,6 +19,7 @@ function App() {
   return (
     <Router>
       <div className='app'>
+
       <Route exact path = '/'>
         <NavHeader 
           token = {token}
