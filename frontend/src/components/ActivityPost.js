@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { callApi } from "../api/apiCalls";
-import styles from './ActivityPost.module.css';
+import styles from './Activities.module.css';
 import { TextField, Button } from "@mui/material";
 
 const ActivityPost = ({ token, onCreate }) => {
@@ -19,6 +19,7 @@ const ActivityPost = ({ token, onCreate }) => {
                 onCreate(response);
                 setNewActivity({ name: "", description: "" });
             }
+
         } catch (error) {
             console.error(error);
         }

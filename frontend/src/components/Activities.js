@@ -142,7 +142,7 @@ const Activities = ({ token }) => {
                     create
                 </Button>
             </form>
-            <div className="styles.MainDiv">
+            <div className="styles.MainDiv" sx={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "10px" }}>
                 {activities.map((activity) => (
                     <div key={activity.id} className={styles.Cards}>
                         {activity.isEditing ? (
@@ -184,7 +184,7 @@ const Activities = ({ token }) => {
                         ) : (
                             <div className={styles.activity}>
                                 <h2>{activity.name}</h2>
-                                <p>{activity.description}</p>
+                                <h3>{activity.description}</h3>
                                 <Button
                                     size="small"
                                     className={styles.editButton}

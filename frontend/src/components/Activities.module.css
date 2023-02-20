@@ -1,36 +1,98 @@
 .activities {
     margin: 0;
     padding: 0;
+    background-color: rgb(27, 31, 31);
 }
 
-.MainDiv {
+.MainDiv{
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     width: 99vw;
     flex-wrap: wrap;
+    /* align-self: center; */
     border-top: 1px solid white;
     user-select: none;
     font-size: calc(2px + 1.7vmin);
     color: white;
     margin-top: 10px;
-    overflow-y: scroll;
+    /* display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2vw;
+    justify-content: center; */
 }
+
 
 .Cards {
     border: 2px solid white;
-    width: calc(30% - 20px);
+    width: 30em;
     height: 15em;
     margin: 10px;
     border-radius: 1%;
     box-shadow: 3px 3px 3px 1px rgb(57, 57, 57);
     background-color: #282c34;
-    text-align: left;
+    text-align: center;
     padding: 20px;
+    padding-top: 8vh;
     color: white;
+    overflow-y: scroll;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
-.activity {
-    overflow-y: scroll;
+.Cards::-webkit-scrollbar {
+    border-radius: 30%;
+}
+
+.Cards::-webkit-scrollbar-track-piece {
+    background: rgb(53, 52, 52);
+    border-radius: 10%;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 9%;
+}
+
+.Button {
+    background-color: #282c34;
+    color: rgb(199, 190, 190);
+    margin-left: 15px;
+}
+
+.Button:hover {
+    background-color: rgb(150, 142, 142);
+    color: black
+}
+
+.heading {
+    color: white;
+    margin-left: calc(80px + 1.325vw);
+    font-size: calc(8px + 1.5vmin);
+    margin-bottom: calc(5px + 1vw);
+}
+
+.createForm {
+    color: white;
+    padding: 10px 0 10px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: calc(5px + 0.7vh);
+    background-color: rgb(27, 31, 31);
+}
+
+.formInputs {
+    margin-left: 20px;
+    background-color: white;
+    border-radius: 5%;
+    padding: 50px;
+    margin-bottom: 10px;
+}
+
+.MuiInputLabel-outlined.MuiInputLabel-shrink {
+    transform: translate(14px, -6px) scale(0.75);
+    margin-bottom: 2em;
 }

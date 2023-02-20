@@ -58,6 +58,7 @@ function App() {
           <ActivityPost
             token={token}
           />
+          <Footer />
         </Route>
 
         <Route path='/routines'>
