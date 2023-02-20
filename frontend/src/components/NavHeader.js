@@ -17,9 +17,11 @@ export const NavHeader = ({token, setToken}) => {
           <Link className={styles.link} to='/' title='Create a new routine or select an existing one'>
             <h4>Routines</h4>
           </Link>
+          {token &&
           <Link className={styles.link} to="/profile" title='Profile'>
             <h4>Profile</h4>
           </Link>
+          }
         </span>
         {/* <Button variant="outlined" color="error">
           Register/Login
